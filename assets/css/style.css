@@ -62,11 +62,23 @@ textarea {
   border: none;
   background-color: var(--app-gray);
   color: var(--app-white);
-  font-size: 16px;
+  font-size: 17px;
   outline: none;
   max-height: 152px;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--app-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--app-white);
+  border-radius: 6px;
+}
 button {
   background-color: var(--app-gray);
   border: none;

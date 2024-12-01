@@ -16,3 +16,7 @@ listen(submitBtn, 'click', () => {
 
   input.value = '';
 });
+
+function validation() {
+  
+}
