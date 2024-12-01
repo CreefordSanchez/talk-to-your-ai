@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --app-black: #1e1e1e;
+  --app-gray: #1e1e1e;
+}
+main {
+  height: 100vh;
+  display: flex;
+}
+
+.navigation-tab {
+  width: 80px;
+  background-color: var(--app-gray);
+}
+
+.chat-contents {
+  width: 100%;
+  background-color: var(--app-black);
+  position: relative;
+}
+
+.text-prompt {
+  position: absolute;
+  bottom: 0;
+}
+
+textarea {
+  width: 100%;
+  background-color: var(--app-black);
+}
