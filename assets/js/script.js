@@ -1,10 +1,10 @@
 'use strict';
 
-import { listen, select } from './data/utility.js';
+import { listen, select, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
 
 const input = select('textarea');
-const submitBtn = select('fa-paper-plane');
+const submitBtn = select('.fa-paper-plane');
 const output = select('p');
 let isValid = false;
 
@@ -28,6 +28,11 @@ listen(input, 'input', () => {
 });
 
 function validation() {
-  if (input.value === '') return false; 
+  if (input.value === '') {
+    style(submitBtn, 'color', '#ffffff4b');
+    return false;
+  }
+
+  style(submitBtn, 'color', '#fff');
   return true;
 }
