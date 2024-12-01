@@ -64,6 +64,7 @@ textarea {
   color: var(--app-white);
   font-size: 16px;
   outline: none;
+  max-height: 152px;
 }
 
 button {

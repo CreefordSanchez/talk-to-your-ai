@@ -1,9 +1,13 @@
 'use strict';
 
-export function listener(selector, event, callBack) {
+export function listen(selector, event, callBack) {
   return selector.addEventListener(event, callBack);
 }
 
-export function selector(selector) {
+export function select(selector) {
   return document.querySelector(selector);
+}
+
+export function style(selector, type, value) {
+  return selector.style[type] = value;
 }
