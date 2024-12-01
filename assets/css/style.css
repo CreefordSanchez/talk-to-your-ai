@@ -7,9 +7,15 @@
 }
 
 :root {
-  --app-black: #1e1e1e;
+  --app-black: #141414;
   --app-gray: #1e1e1e;
+  --app-white: #fff;
 }
+
+html {
+  font-family: "Poppins", sans-serif;
+}
+
 main {
   height: 100vh;
   display: flex;
@@ -26,12 +32,47 @@ main {
   position: relative;
 }
 
-.text-prompt {
+.input-container {
   position: absolute;
-  bottom: 0;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  width: 100%;
+}
+
+.input-prompt {
+  background-color: var(--app-gray);
+  width: 80%;
+  padding: 15px 25px;
+  border-radius: 30px;
+  display: flex;
+}
+
+form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 textarea {
+  resize: none;
   width: 100%;
-  background-color: var(--app-black);
+  border: none;
+  background-color: var(--app-gray);
+  color: var(--app-white);
+  font-size: 16px;
+  outline: none;
+}
+
+button {
+  background-color: var(--app-gray);
+  border: none;
+}
+
+.fa-paper-plane {
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
 }
