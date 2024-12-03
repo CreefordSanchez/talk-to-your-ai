@@ -63,9 +63,11 @@ function addAttributes(isUser, response, paragraph, icon, container) {
 function validation() {
   if (input.value === '') {
     style(submitBtn, 'color', '#ffffff4b');
+    style(submitBtn, 'cursor', 'default');
     return false;
   }
 
+  style(submitBtn, 'cursor', 'pointer');
   style(submitBtn, 'color', '#fff');
   return true;
 }
