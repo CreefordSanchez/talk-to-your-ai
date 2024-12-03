@@ -79,8 +79,11 @@ main {
   width: 100%;
 
   p {
-    width: 70%;
+    max-width: 70%;
+    padding: 15px;
+    border-radius: 5px;
     text-align: right;
+    background-color: var(--app-gray);
   }
 }
 
@@ -102,12 +105,13 @@ main {
   justify-content: center;
   z-index: 1;
   width: min(100% - 10px, 800px);
+  background-color: var(--app-gray);
+  border-radius: 30px;
 }
 
 .input-prompt {
-  background-color: var(--app-gray);
+  background-color: #00000000;
   padding: 23px 25px;
-  border-radius: 30px;
   width: 100%;
   display: flex;
   gap: 15px;
@@ -124,7 +128,7 @@ textarea {
   resize: none;
   width: 100%;
   border: none;
-  background-color: var(--app-gray);
+  background-color: #00000000;
   color: var(--app-white);
   font-size: 17px;
   outline: none;
@@ -143,8 +147,9 @@ textarea {
   background-color: var(--app-white);
   border-radius: 6px;
 }
+
 button {
-  background-color: var(--app-gray);
+  background-color: #00000000;
   border: none;
 }
 

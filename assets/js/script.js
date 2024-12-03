@@ -4,6 +4,7 @@ import { listen, select, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
 
 const convertation = select('.convertation');
+const inputBox = select('.input-container');
 const input = select('textarea');
 const submitBtn = select('.fa-paper-plane');
 const output = select('p');
@@ -26,7 +27,6 @@ listen(input, 'input', () => {
   style(input, 'height', 'auto');
   let newHeight = `${input.scrollHeight}px`;
   style(input, 'height', newHeight);
-  console.log(newHeight);
   validation();
 });
 
@@ -41,7 +41,7 @@ function newMessage(isUser, response) {
 
 function addAttributes(isUser, response, paragraph, icon, container) {
   icon.classList.add('icon');
-  paragraph.innerText = response;
+  paragraph.innerText = response.trim();
 
   if (isUser) {
     container.classList.add('user-respond');
