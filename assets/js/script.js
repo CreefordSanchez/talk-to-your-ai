@@ -13,8 +13,9 @@ listen(submitBtn, 'click', () => {
     let question = input.value;
     newMessage(true, question);
     input.value = '';
+    validation();
     style(input, 'height', 'auto');
-    
+
     getResponse(question).then((response) => { 
       newMessage(false, response);
     });
@@ -51,6 +52,7 @@ function addAttributes(isUser, response, paragraph, icon, container) {
   } else {
     container.classList.add('ai-respond');
     icon.classList.add('ai-icon');
+    icon.innerText = 'AI';
 
     container.appendChild(icon);
     container.appendChild(paragraph);

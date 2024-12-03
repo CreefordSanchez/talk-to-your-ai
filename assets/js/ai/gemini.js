@@ -26,7 +26,7 @@ async function run(question) {
     history: [],
   });
 
-  const result = await chatSession.sendMessage(question);
+  const result = await chatSession.sendMessage(`${question} (speak like in the 80s)`);
   const text = await result.response.text();
   return text; 
 }
