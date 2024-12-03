@@ -17,7 +17,6 @@ html {
 }
 
 main {
-  height: 100vh;
   display: flex;
 }
 
@@ -27,17 +26,18 @@ main {
 }
 
 .chat-contents {
-  width: 100%;
+  height: 100vh;
+  width: calc(1325px - 80px);
   background-color: var(--app-black);
-  position: relative;
   padding: 0 15px;
   color: var(--app-white);
+  overflow: auto;
 }
 
 .header-content {
   display: flex;
   justify-content: end;
-  margin: 20px 0 30px;
+  padding: 20px 0 30px;
 }
 
 .contact-btn {
@@ -51,6 +51,8 @@ main {
 .convertation {
   width: min(100% - 10px, 800px);
   margin-inline: auto;
+  position: relative;
+  padding-bottom: calc(50px + 66px + 20px);
 }
 
 .icon {
@@ -73,7 +75,7 @@ main {
 .user-respond {
   display: flex;
   gap: 15px;
-  margin: 40px 0;
+  margin-bottom: 40px;
   width: 100%;
 
   p {
@@ -93,20 +95,21 @@ main {
 }
 
 .input-container {
-  position: absolute;
+  position: fixed;
   bottom: 50px;
   display: flex;
   justify-content: center;
   z-index: 1;
-  width: 100%;
+  width: min(100% - 10px, 800px);
 }
 
 .input-prompt {
   background-color: var(--app-gray);
-  width: 80%;
   padding: 23px 25px;
   border-radius: 30px;
+  width: 100%;
   display: flex;
+  gap: 15px;
 }
 
 form {
@@ -154,3 +157,16 @@ button {
   display: flex;
   justify-content: end;
 }
+
+/*
+
+ <div class="ai-respond">
+            <div class="icon ai-icon">AI</div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos soluta sit veniam! Error, quibusdam. Ab corrupti magnam nostrum tempore asperiores voluptate quasi quo, vitae iste! Voluptates expedita nam debitis suscipit?
+            </p>
+          </div>
+          <div class="user-respond">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, asperiores sequi voluptatem, quis dolore doloremque voluptatibus earum repudiandae sapiente, necessitatibus odio laborum deserunt quam! Exercitationem doloremque nisi quia totam. Rerum.
+            </p>
+            <div class="icon user-icon">AI</div>
+          </div>*/
