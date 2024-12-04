@@ -20,6 +20,9 @@ main {
   display: flex;
 }
 
+/*------------------------------------------------------------------------------
+  Navigation Tab
+------------------------------------------------------------------------------*/
 .navigation-tab {
   width: 80px;
   background-color: var(--app-gray);
@@ -45,6 +48,9 @@ main {
   cursor: pointer;
 }
 
+/*------------------------------------------------------------------------------
+  Chat Contents
+------------------------------------------------------------------------------*/
 .ai-type-list {
   display: grid;
   gap: 45px;
@@ -233,15 +239,14 @@ button {
   justify-content: end;
 }
 
-/*
+/*------------------------------------------------------------------------------
+  Contact Me
+------------------------------------------------------------------------------*/
 
- <div class="ai-respond">
-            <div class="icon ai-icon">AI</div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos soluta sit veniam! Error, quibusdam. Ab corrupti magnam nostrum tempore asperiores voluptate quasi quo, vitae iste! Voluptates expedita nam debitis suscipit?
-            </p>
-          </div>
-          <div class="user-respond">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, asperiores sequi voluptatem, quis dolore doloremque voluptatibus earum repudiandae sapiente, necessitatibus odio laborum deserunt quam! Exercitationem doloremque nisi quia totam. Rerum.
-            </p>
-            <div class="icon user-icon">AI</div>
-          </div>*/
+.convertation {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000000;
+}
