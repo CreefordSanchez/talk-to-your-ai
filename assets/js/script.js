@@ -1,13 +1,19 @@
 'use strict';
 
-import { listen, select, style } from './data/utility.js';
+import { listen, select, selectAll, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
 
-const convertation = select('.convertation');
+const aiTypeList = [
+  'speak like my girlfriend', 'speak like my boyfriend', 
+  'speak like a cowboy', 'speak like in the 80s'
+];
+const convertation = select('.chat-history');
 const inputBox = select('.input-container');
 const input = select('textarea');
 const submitBtn = select('.fa-paper-plane');
 const output = select('p');
+const aiTypeBtns = selectAll('.icon-circle');
+let typeAI = '';
 
 listen(submitBtn, 'click', () => {
   if (validation()) {
@@ -17,7 +23,7 @@ listen(submitBtn, 'click', () => {
     validation();
     style(input, 'height', 'auto');
 
-    getResponse(question).then((response) => { 
+    getResponse(question, typeAI).then((response) => { 
       newMessage(false, response);
     });
   }
@@ -29,6 +35,17 @@ listen(input, 'input', () => {
   style(input, 'height', newHeight);
   validation();
 });
+
+aiTypeBtns.forEach((type, index) => {
+  listen(type, 'click', ()=> {
+    typeAI = aiTypeList[index];
+    convertation.innerHTML = '';
+
+    getResponse('say hello to me', typeAI).then((response) => { 
+      newMessage(false, response);
+    });
+  });
+}); 
 
 function newMessage(isUser, response) {
   const paragraph = document.createElement('p');

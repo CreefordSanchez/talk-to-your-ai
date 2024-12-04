@@ -20,17 +20,17 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-async function run(question) {
+async function run(question, type) {
   const chatSession = model.startChat({
     generationConfig,
     history: [],
   });
 
-  const result = await chatSession.sendMessage(`${question} (speak like in the 80s)`);
+  const result = await chatSession.sendMessage(`${question} (${type})`);
   const text = await result.response.text();
   return text; 
 }
 
-export async function getResponse(question) {
-  return await run(question);
+export async function getResponse(question, type) {
+  return await run(question, type);
 }

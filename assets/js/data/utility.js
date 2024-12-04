@@ -11,3 +11,7 @@ export function select(selector) {
 export function style(selector, type, value) {
   return selector.style[type] = value;
 }
+
+export function selectAll(selector) {
+  return document.querySelectorAll(selector);
+}
