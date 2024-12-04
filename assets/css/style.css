@@ -193,14 +193,14 @@ header {
   gap: 15px;
 }
 
-form {
+.input-prompt form {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-textarea {
+.input-prompt textarea {
   resize: none;
   width: 100%;
   border: none;
@@ -243,10 +243,91 @@ button {
   Contact Me
 ------------------------------------------------------------------------------*/
 
-.convertation {
+.contact-form {
   position: absolute;
   top: 0;
+  z-index: 2;
   width: 100%;
   height: 100%;
-  background-color: #00000000;
+  background-color: #00000088;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--app-white);
+}
+
+.contact-me {
+  background-color: var(--app-black);
+
+  h2 {
+    font-size: 30px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 5px;
+  }
+
+  input{
+    padding: 7px 10px;
+    border: none;
+  }
+}
+
+.contact-me-title {
+  background-image: url(../img/city.jpg);
+  background-size: cover;
+  background-position: 50% 20%;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.contact-me form {
+  display: grid;
+  gap: 15px;
+  padding: 0 20px;
+  margin: 40px 0;
+}
+
+.last-name {
+  margin-left: 3px;
+}
+.email-input, .message-input {
+  width: 100%;
+}
+
+.input-and-status {
+  display: flex;
+  align-items: center;
+
+  i {
+    margin-left: 10px;
+    font-size: 10px;
+  }
+}
+
+.fa-x {
+  color: #ff0000;
+}
+
+.fa-check {
+  color: #008000;
+}
+
+.submit-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 0 20px 20px 0;
+}
+
+.submit-contact {
+  background-color: #ffffff;
+  color: #000;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
 }
