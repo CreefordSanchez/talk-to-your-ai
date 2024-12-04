@@ -111,6 +111,13 @@ header {
   background-color: var(--app-gray);
 }
 
+.print-version-container {
+  display: flex;
+  justify-content: center;
+  color: #ffffff49;
+  margin-bottom: 20px;
+}
+
 .convertation {
   width: min(100% - 10px, 800px);
   margin-inline: auto;

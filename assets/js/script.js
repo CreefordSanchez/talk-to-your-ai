@@ -3,29 +3,30 @@
 import { listen, select, selectAll, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
 
-const aiTypeList = [
-  'speak like my girlfriend', 'speak like my boyfriend', 
-  'speak like a cowboy', 'speak like in the 80s'
-];
+const aiVersions = { 
+  Girlfriend: 'speak like my girlfriend', Boyfriend: 'speak like my boyfriend',
+  Cowboy: 'speak like a cowboy', BeachBoy: 'speak like in the 80s'
+}
+const aiTypeList = Object.values(aiVersions);
+const aiVersionName = Object.keys(aiVersions);
+const printVersion = select('.print-version');
 const convertation = select('.chat-history');
 const inputBox = select('.input-container');
 const input = select('textarea');
 const submitBtn = select('.fa-paper-plane');
 const output = select('p');
 const aiTypeBtns = selectAll('.icon-circle');
-let typeAI = '';
+let typeAI = aiTypeList[3];
 
 listen(submitBtn, 'click', () => {
   if (validation()) {
     let question = input.value;
-    newMessage(true, question);
     input.value = '';
+
+    newMessage(true, question);
     validation();
     style(input, 'height', 'auto');
-
-    getResponse(question, typeAI).then((response) => { 
-      newMessage(false, response);
-    });
+    geminiAI(false, question);
   }
 });
 
@@ -36,16 +37,26 @@ listen(input, 'input', () => {
   validation();
 });
 
+listen(window, 'load', () => {
+  printVersion.innerText = `${aiVersionName[3]} version`;
+  geminiAI(false, 'say hello to me');
+});
+
 aiTypeBtns.forEach((type, index) => {
   listen(type, 'click', ()=> {
     typeAI = aiTypeList[index];
     convertation.innerHTML = '';
-
-    getResponse('say hello to me', typeAI).then((response) => { 
-      newMessage(false, response);
-    });
+    
+    printVersion.innerText = `${aiVersionName[index]} version`;
+    geminiAI(false, 'say hello to me');
   });
 }); 
+
+function geminiAI(isUser, question) {
+  getResponse(question, typeAI).then((response) => { 
+    newMessage(isUser, response);
+  });
+}
 
 function newMessage(isUser, response) {
   const paragraph = document.createElement('p');
