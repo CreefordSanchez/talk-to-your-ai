@@ -11,10 +11,8 @@ const aiTypeList = Object.values(aiVersions);
 const aiVersionName = Object.keys(aiVersions);
 const printVersion = select('.print-version');
 const convertation = select('.chat-history');
-const inputBox = select('.input-container');
 const input = select('textarea');
 const submitBtn = select('.fa-paper-plane');
-const output = select('p');
 const aiTypeBtns = selectAll('.icon-circle');
 let typeAI = aiTypeList[3];
 
