@@ -59,7 +59,6 @@ function validation() {
     const checkValidation = [
       isNameValid(user), isEmailValid(user), isMessageValid(user)
     ];
-    console.log(checkValidation);
     if (checkValidation.includes(false)) return false;
     return true;
   }
