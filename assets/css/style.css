@@ -323,3 +323,8 @@ button {
   font-weight: 400;
   cursor: pointer;
 }
+
+.input-row p {
+  color: red;
+  height: 18px;
+}

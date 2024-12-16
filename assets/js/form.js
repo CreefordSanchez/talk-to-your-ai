@@ -7,6 +7,12 @@ const appearBtn = select('.contact-btn');
 const contactContainer = select('.contact-form');
 const contactBox = select('.contact-me');
 
+// Error outputs
+const firstNameError = select('.first-name-error');
+const lastNameError = select('.last-name-error');
+const emailError = select('.email-error');
+const messageError = select('.message-error');
+
 //Inputs
 const firstName = select('.first-name');
 const lastName = select('.last-name');
@@ -83,17 +89,21 @@ function isNameValid(user) {
   if (user.firstName === 0) {
     errorLine(firstName, true);
     isValid = false;
+    firstNameError.innerText = 'Enter a FirstName'
 
   } else {
     errorLine(firstName, false);
+    firstNameError.innerText = '';
   }
 
   if (user.lastName.length === 0) {
     errorLine(lastName, true);    
     isValid = false;
+    lastNameError.innerText = 'Enter a LastName';
 
   } else {
     errorLine(lastName, false);
+    lastNameError.innerText = '';
   }
 
   return isValid;
@@ -103,16 +113,26 @@ function isEmailValid(user) {
   let requirements = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.(co|com)$/;
 
   if (requirements.test(user.email)) {
+    emailError.innerText = '';
     errorLine(email, false);
     return true;
+
   } else {
     errorLine(email, true);
+    emailError.innerText = 'example@gmail.com';
     return false;
   }
 }
 
 function isMessageValid(user) {
-  return user.message.length > 0;
+  if (user.message.length > 0) {
+    messageError.innerText = '';
+  return true;
+
+  } else {
+    messageError.innerText = 'Enter a message';
+    return false;
+  }
 }
 
 function errorLine(selector, bool) {
