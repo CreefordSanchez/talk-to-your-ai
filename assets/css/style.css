@@ -85,19 +85,16 @@ main {
 
 .chat-contents {
   height: 100vh;
-  width: calc(1325px - 80px);
+  width: calc(100% - 80px);
   background-color: var(--app-black);
   padding: 0 15px;
   color: var(--app-white);
   overflow: auto;
-  padding-top: 60px;
   position: relative;
 }
 
 header {
-  width: calc(100% - 80px - 15px - 15px);
   padding: 20px;
-  position: fixed;
   top: 0;
 }
 
