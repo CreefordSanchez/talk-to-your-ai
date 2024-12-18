@@ -91,6 +91,7 @@ main {
   color: var(--app-white);
   overflow: auto;
   padding-top: 60px;
+  position: relative;
 }
 
 header {
@@ -115,7 +116,6 @@ header {
 .convertation {
   width: min(100% - 10px, 800px);
   margin-inline: auto;
-  position: relative;
   padding-bottom: calc(50px + 66px + 20px);
 }
 
@@ -163,21 +163,23 @@ header {
 }
 
 .input-container {
-  position: fixed;
-  bottom: 50px;
   display: flex;
   justify-content: center;
   z-index: 1;
-  width: min(100% - 10px, 800px);
   background-color: var(--app-gray);
   border-radius: 30px;
+  height: 72px;
+  bottom: 50px;
+  width: calc(100% - 80px - 30px);
+  
+  position: fixed;
 }
 
 .input-prompt {
   background-color: #00000000;
   padding: 23px 25px;
   width: 100%;
-  display: flex;
+  display: none;
   gap: 15px;
 }
 
