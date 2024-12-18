@@ -94,13 +94,17 @@ main {
 }
 
 header {
-  padding: 20px;
+  padding: 20px 5px;
   top: 0;
 }
 
 .header-content {
   display: flex;
   justify-content: end;
+
+  .expand {
+    font-size: 25px;
+  }
 }
 
 .print-version-container {
@@ -222,4 +226,27 @@ button {
 .user-respond {
   display: flex;
   justify-content: end;
+}
+
+
+/*------------------------------------------------------------------------------
+  Media Queries
+------------------------------------------------------------------------------*/
+@media screen and (max-width: 715px) {
+  .navigation-tab {
+    display: none;
+  }
+
+  .chat-contents {
+    width: 100%;
+  }
+
+  .input-container {
+    width: calc(100% - 30px);
+  }
+
+  .header-content {
+    justify-content: space-between;
+    align-items: center;
+  }
 }
