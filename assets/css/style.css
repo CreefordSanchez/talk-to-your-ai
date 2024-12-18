@@ -166,20 +166,18 @@ header {
   display: flex;
   justify-content: center;
   z-index: 1;
-  background-color: var(--app-gray);
-  border-radius: 30px;
-  height: 72px;
   bottom: 50px;
   width: calc(100% - 80px - 30px);
-  
   position: fixed;
 }
 
 .input-prompt {
-  background-color: #00000000;
+  background-color: var(--app-gray);
+  border-radius: 30px;
   padding: 23px 25px;
-  width: 100%;
-  display: none;
+  width: min(100% - 10px, 800px);
+  margin-inline: auto;
+  display: flex;
   gap: 15px;
 }
 
@@ -206,7 +204,7 @@ header {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--app-gray);
+  background-color: var(--app-black);
 }
 
 ::-webkit-scrollbar-thumb {
