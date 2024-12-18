@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@import url(./form.css);
+
 * {
   margin: 0;
   padding: 0;
@@ -48,9 +50,6 @@ main {
   cursor: pointer;
 }
 
-/*------------------------------------------------------------------------------
-  Chat Contents
-------------------------------------------------------------------------------*/
 .ai-type-list {
   display: grid;
   gap: 45px;
@@ -81,26 +80,95 @@ main {
   cursor: pointer;
 }
 
+.menu-tab {
+  position: fixed;
+  top: 0;
+  left: -100vw;
+  z-index: 3;
+  height: 100vh;
+  width: 300px;
+  background-color: var(--app-gray);
+  transition: 0.5s ease;
+  padding: 20px 15px;
+}
+
+.ai-description-list {
+  padding-top: 20px;
+}
+
+.version-description {
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--app-white);
+}
+
+.logo-and-exapnd-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  i {    
+    color: var(--app-white);
+  }
+
+  .fa-angle-down {
+    font-size: 18px;
+    cursor: pointer;
+  }
+}
+
+.description {
+  color: var(--app-white);
+  display: none;
+
+  h2 {
+    font-weight: 500;
+  }
+  
+  p {
+    font-size: 14px;
+  }
+}
+
+.show-tab {
+  left: 0;
+}
+
+.display-inline {
+  display: inline;
+}
+
+
+/*------------------------------------------------------------------------------
+  Chat Contents
+------------------------------------------------------------------------------*/
 .chat-contents {
   height: 100vh;
-  width: calc(1325px - 80px);
+  width: calc(100% - 80px);
   background-color: var(--app-black);
   padding: 0 15px;
   color: var(--app-white);
   overflow: auto;
-  padding-top: 60px;
+  position: relative;
 }
 
 header {
-  width: calc(100% - 80px - 15px - 15px);
-  padding: 20px;
-  position: fixed;
+  padding: 20px 5px;
   top: 0;
 }
 
 .header-content {
   display: flex;
   justify-content: end;
+
+  .fa-bars {
+    display: none;
+  }
+}
+
+.expand {
+  font-size: 25px;
+  color: var(--app-white);
 }
 
 .print-version-container {
@@ -113,7 +181,6 @@ header {
 .convertation {
   width: min(100% - 10px, 800px);
   margin-inline: auto;
-  position: relative;
   padding-bottom: calc(50px + 66px + 20px);
 }
 
@@ -161,20 +228,20 @@ header {
 }
 
 .input-container {
-  position: fixed;
-  bottom: 50px;
   display: flex;
   justify-content: center;
   z-index: 1;
-  width: min(100% - 10px, 800px);
-  background-color: var(--app-gray);
-  border-radius: 30px;
+  bottom: 50px;
+  width: calc(100% - 80px - 30px);
+  position: fixed;
 }
 
 .input-prompt {
-  background-color: #00000000;
+  background-color: var(--app-gray);
+  border-radius: 30px;
   padding: 23px 25px;
-  width: 100%;
+  width: min(100% - 10px, 800px);
+  margin-inline: auto;
   display: flex;
   gap: 15px;
 }
@@ -202,7 +269,7 @@ header {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--app-gray);
+  background-color: var(--app-black);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -225,106 +292,33 @@ button {
   justify-content: end;
 }
 
+
 /*------------------------------------------------------------------------------
-  Contact Me
+  Media Queries
 ------------------------------------------------------------------------------*/
-
-.contact-btn {
-  border: none;
-  background-color: #1e1e1ee0;
-  color: #fff;
-  padding: 14px 17px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.5s ease;
-}
-
-.contact-btn:hover {
-  background-color: var(--app-gray);
-}
-
-.contact-form {
-  position: absolute;
-  top: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  background-color: #00000088;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--app-white);
-}
-
-.contact-me {
-  background-color: var(--app-black);  
-  padding: 20px 35px;
-  border-radius: 20px;
-
-  input, textarea {
-    outline: none;
-    border: 1px solid var(--app-black);
-    padding: 8px 10px;
-    border-radius: 5px;
+@media screen and (max-width: 715px) {
+  .navigation-tab {
+    display: none;
   }
-  
-  p { font-size: 12px; }
-  
-  h1 { font-weight: 500; }
-}
 
-.contact-title {  
-  margin-bottom: 22px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--app-gray);
-}
-
-.contact-me form {
-  display: grid;
-  gap: 20px;
-}
-
-.last-and-first-name {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  gap: 5px;
-
-}
-
-.input-row:nth-of-type(n + 2) {
-  input {
-    display: block;
+  .chat-contents {
     width: 100%;
   }
 
-  textarea {
-    display: block;
+  .input-container {
+    width: calc(100% - 30px);
+  }
+
+  .header-content {
+    justify-content: space-between;
+    align-items: center;
+
+    .fa-bars {
+      display: inline;
+    }
+  }
+  
+  .ai-respond p {
     width: 100%;
-    height: 80px;
-    resize: none;
-    padding-right: 8px;
   }
-
-  p {
-    margin-top: 5px;
-  }
-}
-
-.form-submit-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.submit {
-  background-color: var(--app-white);
-  padding: 15px 25px;
-  border-radius: 14px;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-.input-row p {
-  color: red;
-  height: 18px;
 }

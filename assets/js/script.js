@@ -3,6 +3,10 @@
 import { listen, select, selectAll, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
 
+
+/*******************************************************************************
+Comunication with AI
+*******************************************************************************/
 const aiVersions = { 
   Girlfriend: 'speak like my girlfriend', Boyfriend: 'speak like my boyfriend',
   Cowboy: 'speak like a cowboy', BeachBoy: 'speak like in the 80s'
@@ -14,7 +18,7 @@ const convertation = select('.chat-history');
 const input = select('textarea');
 const submitBtn = select('.fa-paper-plane');
 const aiTypeBtns = selectAll('.icon-circle');
-let typeAI = aiTypeList[3];
+let typeAI = 'BeachBoy';
 
 listen(submitBtn, 'click', () => {
   if (validation()) {
@@ -36,16 +40,16 @@ listen(input, 'input', () => {
 });
 
 listen(window, 'load', () => {
-  printVersion.innerText = `${aiVersionName[3]} version`;
+  printVersion.innerText = `Beachboy version`;
   geminiAI(false, 'say hello to me');
 });
 
-aiTypeBtns.forEach((type, index) => {
-  listen(type, 'click', ()=> {
-    typeAI = aiTypeList[index];
+aiTypeBtns.forEach(btn => {
+  listen(btn, 'click', ()=> {
+    typeAI = btn.value;
     convertation.innerHTML = '';
     
-    printVersion.innerText = `${aiVersionName[index]} version`;
+    printVersion.innerText = `${typeAI} version`;
     geminiAI(false, 'say hello to me');
   });
 }); 
@@ -97,3 +101,29 @@ function validation() {
   style(submitBtn, 'color', '#fff');
   return true;
 }
+
+/*******************************************************************************
+Navigation tab
+*******************************************************************************/
+const expandBtn = selectAll('.expand');
+const menuTab = select('.menu-tab');
+const showInfo = selectAll('.fa-angle-down');
+const description = selectAll('.description');
+
+expandBtn.forEach(btn => {
+  listen(btn, 'click', () => {
+    menuTab.classList.toggle('show-tab');
+  });
+});
+
+showInfo.forEach((btn, index) => {
+  listen(btn, 'click', () => {
+    description[index].classList.toggle('display-inline');
+  });
+});
+/*
+aiTypeBtns.forEach(btn => {
+  listen(btn, 'click', ()=> {    
+    style(menuTab, 'left', '-100vw');
+  });
+});*/
