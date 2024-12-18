@@ -3,6 +3,10 @@
 import { listen, select, selectAll, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
 
+
+/*******************************************************************************
+Comunication with AI
+*******************************************************************************/
 const aiVersions = { 
   Girlfriend: 'speak like my girlfriend', Boyfriend: 'speak like my boyfriend',
   Cowboy: 'speak like a cowboy', BeachBoy: 'speak like in the 80s'
@@ -97,3 +101,17 @@ function validation() {
   style(submitBtn, 'color', '#fff');
   return true;
 }
+
+/*******************************************************************************
+Navigation tab
+*******************************************************************************/
+const expandBtn = selectAll('.expand');
+const menuTab = select('.menu-tab');
+const background = select('.chat-contents');
+
+expandBtn.forEach(btn => {
+  listen(btn, 'click', () => {
+    menuTab.classList.toggle('show-tab');
+    console.log('click');
+  });
+});

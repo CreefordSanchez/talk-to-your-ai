@@ -50,9 +50,6 @@ main {
   cursor: pointer;
 }
 
-/*------------------------------------------------------------------------------
-  Chat Contents
-------------------------------------------------------------------------------*/
 .ai-type-list {
   display: grid;
   gap: 45px;
@@ -83,6 +80,25 @@ main {
   cursor: pointer;
 }
 
+.menu-tab {
+  position: fixed;
+  top: 0;
+  left: -100vw;
+  z-index: 3;
+  height: 100vh;
+  width: 300px;
+  background-color: var(--app-gray);
+  transition: 0.5s ease;
+  padding: 20px 15px;
+}
+
+.show-tab {
+  left: 0;
+}
+
+/*------------------------------------------------------------------------------
+  Chat Contents
+------------------------------------------------------------------------------*/
 .chat-contents {
   height: 100vh;
   width: calc(100% - 80px);
@@ -102,9 +118,14 @@ header {
   display: flex;
   justify-content: end;
 
-  .expand {
-    font-size: 25px;
+  .fa-bars {
+    display: none;
   }
+}
+
+.expand {
+  font-size: 25px;
+  color: var(--app-white);
 }
 
 .print-version-container {
@@ -248,6 +269,10 @@ button {
   .header-content {
     justify-content: space-between;
     align-items: center;
+
+    .fa-bars {
+      display: inline;
+    }
   }
   
   .ai-respond p {
