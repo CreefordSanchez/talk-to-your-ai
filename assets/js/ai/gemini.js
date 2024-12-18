@@ -26,7 +26,7 @@ async function run(question, type) {
     history: [],
   });
 
-  const result = await chatSession.sendMessage(`${question} (${type})`);
+  const result = await chatSession.sendMessage(`${question} (answer as your a ${type})`);
   const text = await result.response.text();
   return text; 
 }
