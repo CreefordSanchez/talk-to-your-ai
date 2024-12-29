@@ -90,10 +90,13 @@ main {
   background-color: var(--app-gray);
   transition: 0.5s ease;
   padding: 20px 15px;
-}
+  overflow: auto;
 
-.ai-description-list {
-  padding-top: 20px;
+  h1 {
+    color: var(--app-white);
+    padding-top: 20px;
+    font-weight: 500;
+  }
 }
 
 .version-description {
@@ -138,20 +141,9 @@ main {
   display: inline;
 }
 
-
 /*------------------------------------------------------------------------------
-  Chat Contents
+  Header
 ------------------------------------------------------------------------------*/
-.chat-contents {
-  height: 100vh;
-  width: calc(100% - 80px);
-  background-color: var(--app-black);
-  padding: 0 15px;
-  color: var(--app-white);
-  overflow: auto;
-  position: relative;
-}
-
 header {
   padding: 20px 5px;
   top: 0;
@@ -166,9 +158,46 @@ header {
   }
 }
 
+.header-btn {
+  display: flex;
+  gap: 10px;
+
+  button {
+    border: none;
+    height: 43px;
+    width: 105px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s ease;
+    font-size: 14px;
+  }
+}
+
+.save-btn {
+  background-color: var(--app-white);
+  color: var(--app-black);
+}
+
+.save-btn:hover {
+  background-color: #ffffffe5;
+}
+
 .expand {
   font-size: 25px;
   color: var(--app-white);
+}
+
+/*------------------------------------------------------------------------------
+  Chat Contents
+------------------------------------------------------------------------------*/
+.chat-contents {
+  height: 100vh;
+  width: calc(100% - 80px);
+  background-color: var(--app-black);
+  padding: 0 15px;
+  color: var(--app-white);
+  overflow: auto;
+  position: relative;
 }
 
 .print-version-container {
@@ -277,7 +306,7 @@ header {
   border-radius: 6px;
 }
 
-button {
+.input-prompt button {
   background-color: #00000000;
   border: none;
 }
@@ -291,7 +320,6 @@ button {
   display: flex;
   justify-content: end;
 }
-
 
 /*------------------------------------------------------------------------------
   Media Queries

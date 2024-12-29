@@ -1,13 +1,8 @@
 @charset "utf-8";
 
 .contact-btn {
-  border: none;
   background-color: #1e1e1ee0;
-  color: #fff;
-  padding: 14px 17px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.5s ease;
+  color: var(--app-white);
 }
 
 .contact-btn:hover {
