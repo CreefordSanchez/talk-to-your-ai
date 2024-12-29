@@ -5,7 +5,7 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from 'https://cdn.skypack.dev/@google/generative-ai';
 
 //const question = 'are you an ai?';
-const apiKey = 'AIzaSyAm_74u3wa-uWi5SENJdzvW0rJIQUOJzBk';
+const apiKey = 'AIzaSyAaUr1Rmpvud3adiE6YKL2KbjKh9b2gfhk';
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
