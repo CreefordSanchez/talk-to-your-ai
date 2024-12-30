@@ -50,8 +50,9 @@ listen(window, 'load', () => {
 
 aiTypeBtns.forEach(btn => {
   listen(btn, 'click', ()=> {
+    updateSave(currentId);
     const convertation = select('.chat-history');
-    
+
     typeAI = btn.value;
     convertation.innerHTML = '';
     
@@ -174,11 +175,9 @@ listen(submitSave, 'click', () => {
 });
 
 function updateSave(id) {
-  console.log(id)
   if (id != '') {
-    let placeholder = getChatContent(id);
-    const chatInfo = JSON.parse(placeholder);
-
+    const chatInfo = getChatContent(id);
+    console.log(chatInfo.currentChat);
     chatInfo.currentChat = chatContainer.innerHTML;
     sessionStorage.setItem(id, JSON.stringify(chatInfo));
   }
