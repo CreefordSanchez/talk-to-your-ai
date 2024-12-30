@@ -20,12 +20,14 @@ const input = select('textarea');
 const submitBtn = select('.fa-paper-plane');
 const aiTypeBtns = selectAll('.icon-circle');
 let typeAI = 'BeachBoy';
+let currentId = '';
 
 listen(submitBtn, 'click', () => {
+  updateSave(currentId);
   if (validation()) {
     let question = input.value;
     input.value = '';
-
+    
     newMessage(true, question);
     validation();
     style(input, 'height', 'auto');
@@ -48,6 +50,8 @@ listen(window, 'load', () => {
 
 aiTypeBtns.forEach(btn => {
   listen(btn, 'click', ()=> {
+    const convertation = select('.chat-history');
+    
     typeAI = btn.value;
     convertation.innerHTML = '';
     
@@ -66,8 +70,10 @@ function newMessage(isUser, response) {
   const paragraph = document.createElement('p');
   const icon = document.createElement('div');
   const container = document.createElement('div');
+  const convertation = select('.chat-history');
 
   addAttributes(isUser, response, paragraph, icon, container);
+
   convertation.appendChild(container);
 }
 
@@ -145,7 +151,6 @@ listen(screenContainer, 'click', function(event) {
   }
 });
 
-
 /*******************************************************************************
 Save History
 *******************************************************************************/
@@ -168,12 +173,24 @@ listen(submitSave, 'click', () => {
   }
 });
 
+function updateSave(id) {
+  console.log(id)
+  if (id != '') {
+    let placeholder = getChatContent(id);
+    const chatInfo = JSON.parse(placeholder);
+
+    chatInfo.currentChat = chatContainer.innerHTML;
+    sessionStorage.setItem(id, JSON.stringify(chatInfo));
+  }
+
+  id = '';
+}
+
 function chatSavedBtns() {
   const historyArr = Array.from(historyList.children);
   
   historyArr.forEach(chat => {
     listen(chat, 'click', () => {
-      console.log('click');
       chatContainer.innerHTML = '';
       getSavedChat(chat);
     });
@@ -181,7 +198,8 @@ function chatSavedBtns() {
 }
 
 function getSavedChat(container) {
-  const chatInfo = getChatContent(container.id);
+  currentId = container.id;
+  const chatInfo = getChatContent(currentId);
   chatContainer.innerHTML = chatInfo.currentChat;
   typeAI = chatInfo.version;
 }
