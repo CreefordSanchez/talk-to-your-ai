@@ -154,15 +154,6 @@ const appearSaveBtn = select('.save-btn');
 const saveName = select('.chat-name');
 const submitSave = select('.save');
 const historyList = select('.history-list');
-const chat = selectAll('.chat-info');
-
-chat.forEach(container => {
-  listen(container, 'click', () => {
-    console.log('click');
-    chatContainer.innerHTML = '';
-    getSavedChat(container);
-  });
-});
 
 listen(appearSaveBtn, 'click', () => {
   style(screenContainer, 'display', 'flex');
@@ -176,6 +167,18 @@ listen(submitSave, 'click', () => {
     closeFloatingScreen();
   }
 });
+
+function chatSavedBtns() {
+  const historyArr = Array.from(historyList.children);
+  
+  historyArr.forEach(chat => {
+    listen(chat, 'click', () => {
+      console.log('click');
+      chatContainer.innerHTML = '';
+      getSavedChat(chat);
+    });
+  });
+}
 
 function getSavedChat(container) {
   const chatInfo = getChatContent(container.id);
@@ -215,7 +218,8 @@ function listHistory() {
     for (let i = 0; i < sessionStorage.length; i++) {
       let id = sessionStorage.key(i);    
       const chat = getChatContent(id);
-      setChatInfo(chat);
+      setChatInfo(chat, id);
+      chatSavedBtns();
     }
   } else {
     historyList.innerHTML = '<p>No chat saved</p>';
