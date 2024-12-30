@@ -2,7 +2,7 @@
 
 import { listen, select, selectAll, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
-
+import { errorLine } from './form.js';
 
 /*******************************************************************************
 Comunication with AI
@@ -11,6 +11,7 @@ const aiVersions = {
   Girlfriend: 'speak like my girlfriend', Boyfriend: 'speak like my boyfriend',
   Cowboy: 'speak like a cowboy', BeachBoy: 'speak like in the 80s'
 }
+
 const aiTypeList = Object.values(aiVersions);
 const aiVersionName = Object.keys(aiVersions);
 const printVersion = select('.print-version');
@@ -42,6 +43,7 @@ listen(input, 'input', () => {
 listen(window, 'load', () => {
   printVersion.innerText = `Beachboy version`;
   geminiAI(false, 'say hello to me');
+  listHistory();
 });
 
 aiTypeBtns.forEach(btn => {
@@ -121,9 +123,138 @@ showInfo.forEach((btn, index) => {
     description[index].classList.toggle('display-inline');
   });
 });
-/*
-aiTypeBtns.forEach(btn => {
-  listen(btn, 'click', ()=> {    
-    style(menuTab, 'left', '-100vw');
+
+/*******************************************************************************
+floating screen
+*******************************************************************************/
+const screenContainer = select('.floating-screen-container');
+const floatingScreen = select('.floating-screen');
+const screenArr = Array.from(floatingScreen.children);
+
+listen(screenContainer, 'click', function(event) {
+  const child = floatingScreen.getBoundingClientRect();
+
+  if (
+    event.clientY < child.top || event.clientY > child.bottom || 
+    event.clientX < child.left || event.clientX > child.right
+  ) {
+    style(screenContainer, 'display', 'none');
+    screenArr.forEach(child => {
+      style(child, 'display', 'none');
+    });
+  }
+});
+
+
+/*******************************************************************************
+Save History
+*******************************************************************************/
+const chatContainer = select('.convertation');
+const appearSaveBtn = select('.save-btn');
+const saveName = select('.chat-name');
+const submitSave = select('.save');
+const historyList = select('.history-list');
+const chat = selectAll('.chat-info');
+
+chat.forEach(container => {
+  listen(container, 'click', () => {
+    console.log('click');
+    chatContainer.innerHTML = '';
+    getSavedChat(container);
   });
-});*/
+});
+
+listen(appearSaveBtn, 'click', () => {
+  style(screenContainer, 'display', 'flex');
+  style(screenArr[1], 'display', 'inline');
+});
+
+listen(submitSave, 'click', () => {
+  if(validateSaveName()) {
+    saveNewChat();
+    saveName.value = '';
+    closeFloatingScreen();
+  }
+});
+
+function getSavedChat(container) {
+  const chatInfo = getChatContent(container.id);
+  chatContainer.innerHTML = chatInfo.currentChat;
+  typeAI = chatInfo.version;
+}
+
+function validateSaveName() {
+  let name = saveName.value;
+
+  if (name === '') {
+    errorLine(saveName, true);
+    return false;
+  }
+
+  errorLine(saveName, false);
+  return true;
+}
+
+function saveNewChat() {
+  const newSave = { 
+    currentChat: chatContainer.innerHTML, 
+    version: typeAI,
+    chatName: saveName.value
+  };
+
+  let id = new Date;
+  sessionStorage.setItem(id.getTime(), JSON.stringify(newSave));
+
+  listHistory();
+}
+
+function listHistory() {
+  historyList.innerHTML = '';
+
+  if (sessionStorage.length > 0) {
+    for (let i = 0; i < sessionStorage.length; i++) {
+      let id = sessionStorage.key(i);    
+      const chat = getChatContent(id);
+      setChatInfo(chat);
+    }
+  } else {
+    historyList.innerHTML = '<p>No chat saved</p>';
+  }  
+}
+
+function getChatContent(id) {
+  let placeholder = sessionStorage.getItem(id);
+  const chatInfo = JSON.parse(placeholder);
+
+  return chatInfo;
+}
+
+function setChatInfo(chatInfo, id) {
+  const container = document.createElement('div');
+  const printName = document.createElement('h2');
+  const deleteBtn = document.createElement('button');
+  const trashIcon = document.createElement('i');
+
+  printName.innerText = chatInfo.chatName;
+  deleteBtn.value = chatInfo.version;
+
+  giveAtributes(container, printName, deleteBtn, trashIcon, id);
+}
+
+function giveAtributes(container, printName, deleteBtn, trashIcon, id) {
+  trashIcon.classList.add('fa-solid', 'fa-trash', 'delete');
+  container.classList.add('chat-info');
+  container.id = id;
+
+  deleteBtn.append(trashIcon);
+  container.append(printName, deleteBtn);
+
+  historyList.appendChild(container);
+}
+
+function closeFloatingScreen() {
+  style(screenContainer, 'display', 'none');
+  screenArr.forEach(child => {
+    style(child, 'display', 'none');
+  });
+}

@@ -1,11 +1,40 @@
 'use strict';
 
 import { listen, select, selectAll, style } from './data/utility.js';
+//prevent reload when submit
+const form = selectAll('form');
+form.forEach(form => {
+  listen(form, 'click', (event) => {
+    event.preventDefault();
+  });
+});
 
+/*******************************************************************************
+floating screen
+*******************************************************************************/
+const screenContainer = select('.floating-screen-container');
+const floatingScreen = select('.floating-screen');
+const screenArr = Array.from(floatingScreen.children);
+
+listen(screenContainer, 'click', function(event) {
+  const child = floatingScreen.getBoundingClientRect();
+
+  if (
+    event.clientY < child.top || event.clientY > child.bottom || 
+    event.clientX < child.left || event.clientX > child.right
+  ) {
+    style(screenContainer, 'display', 'none');
+    screenArr.forEach(child => {
+      style(child, 'display', 'none');
+    });
+  }
+});
+
+/*******************************************************************************
+Contact Form
+*******************************************************************************/
 const submitBtn = select('.submit');
 const appearBtn = select('.contact-btn');
-const contactContainer = select('.contact-form');
-const contactBox = select('.contact-me');
 
 // Error outputs
 const firstNameError = select('.first-name-error');
@@ -20,24 +49,18 @@ const email = select('.email');
 const message = select('.message');
 const inputList = [firstName, lastName, email, message];
 
-listen(contactContainer, 'click', function(event) {
-  const child = contactBox.getBoundingClientRect();
-
-  if (
-    event.clientY < child.top || event.clientY > child.bottom || 
-    event.clientX < child.left || event.clientX > child.right
-  ) {
-    style(contactContainer, 'display', 'none');
-  }
-});
 
 listen(appearBtn, 'click', () => {  
-  style(contactContainer, 'display', 'flex');
+  style(screenContainer, 'display', 'flex');
+  style(screenArr[0], 'display', 'inline');
 });
 
 listen(submitBtn, 'click', () => {
   if (validation()) {
-    style(contactContainer, 'display', 'none');
+    style(screenContainer, 'display', 'none');
+    screenArr.forEach(child => {
+      style(child, 'display', 'none');
+    });
   }
 });
 
@@ -134,7 +157,7 @@ function isMessageValid(user) {
   }
 }
 
-function errorLine(selector, bool) {
+export function errorLine(selector, bool) {
   if (bool) {
     let redLine = '1px solid #ff0000'
     style(selector, 'border', redLine);
