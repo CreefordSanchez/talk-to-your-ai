@@ -5,7 +5,7 @@ import { getResponse } from './ai/gemini.js';
 import { errorLine } from './form.js';
 
 /*******************************************************************************
-Comunication with AI
+Comunication with AI console
 *******************************************************************************/
 const aiVersions = { 
   Girlfriend: 'speak like my girlfriend', Boyfriend: 'speak like my boyfriend',
@@ -130,7 +130,7 @@ showInfo.forEach((btn, index) => {
     description[index].classList.toggle('display-inline');
   });
 });
-
+ 
 /*******************************************************************************
 floating screen
 *******************************************************************************/
@@ -160,6 +160,7 @@ const appearSaveBtn = select('.save-btn');
 const saveName = select('.chat-name');
 const submitSave = select('.save');
 const historyList = select('.history-list');
+let willDelete = false;
 
 listen(appearSaveBtn, 'click', () => {
   style(screenContainer, 'display', 'flex');
@@ -174,10 +175,21 @@ listen(submitSave, 'click', () => {
   }
 });
 
+function deleteSaveBtns() {
+  const deleteSave = selectAll('.chat-info button');
+
+  deleteSave.forEach(deleteBtn => {
+    listen(deleteBtn, 'click', () => {
+      sessionStorage.removeItem(deleteBtn.value);
+      willDelete = true;
+      listHistory();
+    }); 
+  })
+}
+
 function updateSave(id) {
   if (id != '') {
     const chatInfo = getChatContent(id);
-    console.log(chatInfo.currentChat);
     chatInfo.currentChat = chatContainer.innerHTML;
     sessionStorage.setItem(id, JSON.stringify(chatInfo));
   }
@@ -190,8 +202,12 @@ function chatSavedBtns() {
   
   historyArr.forEach(chat => {
     listen(chat, 'click', () => {
-      chatContainer.innerHTML = '';
-      getSavedChat(chat);
+      if (!willDelete) {
+        chatContainer.innerHTML = '';
+        getSavedChat(chat);
+      } else {
+        willDelete = true;
+      }
     });
   });
 }
@@ -236,7 +252,8 @@ function listHistory() {
       let id = sessionStorage.key(i);    
       const chat = getChatContent(id);
       setChatInfo(chat, id);
-      chatSavedBtns();
+      deleteSaveBtns();
+      chatSavedBtns(); 
     }
   } else {
     historyList.innerHTML = '<p>No chat saved</p>';
@@ -257,7 +274,7 @@ function setChatInfo(chatInfo, id) {
   const trashIcon = document.createElement('i');
 
   printName.innerText = chatInfo.chatName;
-  deleteBtn.value = chatInfo.version;
+  deleteBtn.value = id;
 
   giveAtributes(container, printName, deleteBtn, trashIcon, id);
 }
