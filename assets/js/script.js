@@ -2,7 +2,6 @@
 
 import { listen, select, selectAll, style } from './data/utility.js';
 import { getResponse } from './ai/gemini.js';
-import { errorLine } from './form.js';
 
 /*******************************************************************************
 Comunication with AI console
@@ -283,4 +282,22 @@ function giveAtributes(container, printName, deleteBtn, trashIcon, id) {
   container.append(printName, deleteBtn);
 
   historyList.appendChild(container);
+}
+
+//prevent reload when submit
+const form = selectAll('form');
+form.forEach(form => {
+  listen(form, 'click', (event) => {
+    event.preventDefault();
+  });
+});
+
+function errorLine(selector, bool) {
+  if (bool) {
+    let redLine = '2px solid #ff0000'
+    style(selector, 'border', redLine);
+  } else {
+    let removeLine = '2px solid #141414'
+    style(selector, 'border', removeLine);
+  }
 }
