@@ -132,11 +132,10 @@ showInfo.forEach((btn, index) => {
 });
  
 /*******************************************************************************
-floating screen
+floating screen errorLine
 *******************************************************************************/
 const screenContainer = select('.floating-screen-container');
 const floatingScreen = select('.floating-screen');
-const screenArr = Array.from(floatingScreen.children);
 
 listen(screenContainer, 'click', function(event) {
   const child = floatingScreen.getBoundingClientRect();
@@ -146,9 +145,6 @@ listen(screenContainer, 'click', function(event) {
     event.clientX < child.left || event.clientX > child.right
   ) {
     style(screenContainer, 'display', 'none');
-    screenArr.forEach(child => {
-      style(child, 'display', 'none');
-    });
   }
 });
 
@@ -164,14 +160,13 @@ let willDelete = false;
 
 listen(appearSaveBtn, 'click', () => {
   style(screenContainer, 'display', 'flex');
-  style(screenArr[1], 'display', 'inline');
 });
 
 listen(submitSave, 'click', () => {
   if(validateSaveName()) {
     saveNewChat();
     saveName.value = '';
-    closeFloatingScreen();
+    style(screenContainer, 'display', 'none');
   }
 });
 
@@ -288,11 +283,4 @@ function giveAtributes(container, printName, deleteBtn, trashIcon, id) {
   container.append(printName, deleteBtn);
 
   historyList.appendChild(container);
-}
-
-function closeFloatingScreen() {
-  style(screenContainer, 'display', 'none');
-  screenArr.forEach(child => {
-    style(child, 'display', 'none');
-  });
 }
